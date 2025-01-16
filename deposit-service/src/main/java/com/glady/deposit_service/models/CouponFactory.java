@@ -8,15 +8,15 @@ import java.time.Month;
 
 @Component
 public class CouponFactory {
-    public Coupon createCoupon(String userId, String senderId, Deposit deposit){
+    public Coupon createCoupon(String userId, String senderId, Deposit deposit, LocalDate receiveDate){
         if(deposit.depositType().equals(DepositType.GIFT)){
             return Gift.builder()
                     .userId(userId)
                     .senderId(senderId)
                     .amount(deposit.amount())
                     .remainingAmount(deposit.amount())
-                    .sendingDate(deposit.sendingDate())
-                    .expirationDate(calculateGiftExpirationDate(deposit.sendingDate()))
+                    .sendingDate(receiveDate)
+                    .expirationDate(calculateGiftExpirationDate(receiveDate))
                     .build();
         }else{
             return Meal.builder()
@@ -24,8 +24,8 @@ public class CouponFactory {
                     .senderId(senderId)
                     .amount(deposit.amount())
                     .remainingAmount(deposit.amount())
-                    .sendingDate(deposit.sendingDate())
-                    .expirationDate(calculateMealExpirationDate(deposit.sendingDate()))
+                    .sendingDate(receiveDate)
+                    .expirationDate(calculateMealExpirationDate(receiveDate))
                     .build();
         }
     }
@@ -33,13 +33,13 @@ public class CouponFactory {
     /**
      * Calculate the expiration date for a meal ticket based on its distribution date.
      * The expiration date is set at the end of next February after the sending date.
-     * @param sendingDate
+     * @param receiveDate
      * @return
      */
-    private LocalDate calculateMealExpirationDate(LocalDate sendingDate){
-        int dayInFebruaryForTheYear = sendingDate.withMonth(Month.FEBRUARY.getValue()).lengthOfMonth();
-        LocalDate result = LocalDate.of(sendingDate.getYear(), Month.FEBRUARY, dayInFebruaryForTheYear);
-        if(sendingDate.isAfter(result)){
+    private LocalDate calculateMealExpirationDate(LocalDate receiveDate){
+        int dayInFebruaryForTheYear = receiveDate.withMonth(Month.FEBRUARY.getValue()).lengthOfMonth();
+        LocalDate result = LocalDate.of(receiveDate.getYear(), Month.FEBRUARY, dayInFebruaryForTheYear);
+        if(receiveDate.isAfter(result)){
             result = LocalDate.of(
                     result.plusYears(1).getYear(),
                     Month.FEBRUARY,
@@ -51,10 +51,10 @@ public class CouponFactory {
     /**
      * Calculate the expiration date for a gift card based on its distribution date.
      * The expiration date is set to 365 days after the sending date.
-     * @param sendingDate
+     * @param receiveDate
      * @return
      */
-    private LocalDate calculateGiftExpirationDate(LocalDate sendingDate){
-        return sendingDate.plusDays(365L);
+    private LocalDate calculateGiftExpirationDate(LocalDate receiveDate){
+        return receiveDate.plusDays(365L);
     }
 }

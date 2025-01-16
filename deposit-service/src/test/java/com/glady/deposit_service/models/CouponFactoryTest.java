@@ -19,11 +19,11 @@ public class CouponFactoryTest {
         //GIVEN
         String userId = "userId";
         String senderId = "senderId";
-        LocalDate sendingDate = LocalDate.of(2025, 1, 1);
-        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL, sendingDate);
+        LocalDate receiveDate = LocalDate.of(2025, 1, 1);
+        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL);
 
         //WHEN
-        Coupon actual = factory.createCoupon(userId, senderId, deposit);
+        Coupon actual = factory.createCoupon(userId, senderId, deposit, receiveDate);
 
         //THEN
         Assert.assertNotNull(actual);
@@ -36,11 +36,11 @@ public class CouponFactoryTest {
         //GIVEN
         String userId = "userId";
         String senderId = "senderId";
-        LocalDate sendingDate = LocalDate.of(2024, 1, 1);
-        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL, sendingDate);
+        LocalDate receiveDate = LocalDate.of(2024, 1, 1);
+        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL);
 
         //WHEN
-        Coupon actual = factory.createCoupon(userId, senderId, deposit);
+        Coupon actual = factory.createCoupon(userId, senderId, deposit, receiveDate);
 
         //THEN
         Assert.assertNotNull(actual);
@@ -54,11 +54,11 @@ public class CouponFactoryTest {
         //GIVEN
         String userId = "userId";
         String senderId = "senderId";
-        LocalDate sendingDate = LocalDate.of(2024, 3, 1);
-        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL, sendingDate);
+        LocalDate receiveDate = LocalDate.of(2024, 3, 1);
+        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.MEAL);
 
         //WHEN
-        Coupon actual = factory.createCoupon(userId, senderId, deposit);
+        Coupon actual = factory.createCoupon(userId, senderId, deposit, receiveDate);
 
         //THEN
         Assert.assertNotNull(actual);
@@ -71,11 +71,11 @@ public class CouponFactoryTest {
         //GIVEN
         String userId = "userId";
         String senderId = "senderId";
-        LocalDate sendingDate = LocalDate.of(2025, 1, 1);
-        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.GIFT, sendingDate);
+        LocalDate receiveDate = LocalDate.of(2025, 1, 1);
+        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.GIFT);
 
         //WHEN
-        Coupon actual = factory.createCoupon(userId, senderId, deposit);
+        Coupon actual = factory.createCoupon(userId, senderId, deposit, receiveDate);
 
         //THEN
         Assert.assertNotNull(actual);
@@ -88,11 +88,11 @@ public class CouponFactoryTest {
         //GIVEN
         String userId = "userId";
         String senderId = "senderId";
-        LocalDate sendingDate = LocalDate.of(2024, 1, 1);
-        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.GIFT, sendingDate);
+        LocalDate receiveDate = LocalDate.of(2024, 1, 1);
+        Deposit deposit = new Deposit(new BigDecimal(100), DepositType.GIFT);
 
         //WHEN
-        Coupon actual = factory.createCoupon(userId, senderId, deposit);
+        Coupon actual = factory.createCoupon(userId, senderId, deposit, receiveDate);
 
         //THEN
         Assert.assertNotNull(actual);

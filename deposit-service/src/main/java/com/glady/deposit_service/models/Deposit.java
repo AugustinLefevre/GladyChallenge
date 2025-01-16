@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 public record Deposit(
         BigDecimal amount,
-        DepositType depositType,
-        LocalDate sendingDate
+        DepositType depositType
 ) {
 }

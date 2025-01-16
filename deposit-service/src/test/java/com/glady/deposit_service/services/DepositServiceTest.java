@@ -27,17 +27,17 @@ public class DepositServiceTest {
     @Test
     public void testCreateCoupon(){
         //GIVEN
-        Deposit deposit1 = new Deposit(new BigDecimal(100), DepositType.GIFT, LocalDate.now());
-        Deposit deposit2 = new Deposit(new BigDecimal(100), DepositType.MEAL, LocalDate.now());
+        Deposit deposit1 = new Deposit(new BigDecimal(100), DepositType.GIFT);
+        Deposit deposit2 = new Deposit(new BigDecimal(100), DepositType.MEAL);
         DepositRequest request = new DepositRequest("userId", "senderId", Arrays.asList(deposit1, deposit2));
 
         //WHEN
         service.createCoupons(request);
 
         //THEN
-        Mockito.verify(couponFactory, Mockito.times(2)).createCoupon(Mockito.eq(request.userId()), Mockito.eq(request.senderId()), Mockito.any());
-        Mockito.verify(couponFactory, Mockito.times(1)).createCoupon(request.userId(), request.senderId(), deposit1);
-        Mockito.verify(couponFactory, Mockito.times(1)).createCoupon(request.userId(), request.senderId(), deposit2);
+        Mockito.verify(couponFactory, Mockito.times(2)).createCoupon(Mockito.eq(request.userId()), Mockito.eq(request.senderId()), Mockito.any(), Mockito.any(LocalDate.class));
+        Mockito.verify(couponFactory, Mockito.times(1)).createCoupon(request.userId(), request.senderId(), deposit1, LocalDate.now());
+        Mockito.verify(couponFactory, Mockito.times(1)).createCoupon(request.userId(), request.senderId(), deposit2, LocalDate.now());
         Mockito.verify(giftRepository, Mockito.times(1)).save(Mockito.any());
         Mockito.verify(mealRepository, Mockito.times(1)).save(Mockito.any());
     }

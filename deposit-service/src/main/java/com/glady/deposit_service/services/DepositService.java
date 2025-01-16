@@ -7,6 +7,7 @@ import com.glady.deposit_service.requests.DepositRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Service
 public class DepositService {
@@ -27,8 +28,9 @@ public class DepositService {
     public void createCoupons(DepositRequest request){
         String userId = request.userId();
         String senderId = request.senderId();
+        LocalDate receiveDate = LocalDate.now();
         for(Deposit deposit : request.deposits()){
-            Coupon coupon = couponFactory.createCoupon(userId, senderId, deposit);
+            Coupon coupon = couponFactory.createCoupon(userId, senderId, deposit, receiveDate);
             if(deposit.depositType().equals(DepositType.GIFT)){
                 giftRepository.save((Gift)coupon);
             }
