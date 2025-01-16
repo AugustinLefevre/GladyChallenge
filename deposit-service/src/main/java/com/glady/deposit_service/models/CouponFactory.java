@@ -8,6 +8,15 @@ import java.time.Month;
 
 @Component
 public class CouponFactory {
+    /**
+     * Used to build Gift and Meal from a DepositRequest.
+     * Must be replaced by a builder if number of parameters exceeds four
+     * @param userId
+     * @param senderId
+     * @param deposit
+     * @param receiveDate
+     * @return
+     */
     public Coupon createCoupon(String userId, String senderId, Deposit deposit, LocalDate receiveDate){
         if(deposit.depositType().equals(DepositType.GIFT)){
             return Gift.builder()
