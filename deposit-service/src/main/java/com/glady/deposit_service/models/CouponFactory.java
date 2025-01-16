@@ -11,10 +11,10 @@ public class CouponFactory {
     /**
      * Used to build Gift and Meal from a DepositRequest.
      * Must be replaced by a builder if number of parameters exceeds four
-     * @param userId
-     * @param senderId
-     * @param deposit
-     * @param receiveDate
+     * @param userId The User's UUID
+     * @param senderId The Company's UUID
+     * @param deposit The deposit type and amount
+     * @param receiveDate The date of receipt of the deposit
      * @return
      */
     public Coupon createCoupon(String userId, String senderId, Deposit deposit, LocalDate receiveDate){
