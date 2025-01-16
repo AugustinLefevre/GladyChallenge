@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 @Component
 public class CouponFactory {
@@ -36,11 +37,13 @@ public class CouponFactory {
      * @return
      */
     private LocalDate calculateMealExpirationDate(LocalDate sendingDate){
-        int dayInFebruaryForTheYear = sendingDate.withMonth(2).lengthOfMonth();
-        LocalDate result = LocalDate.of(sendingDate.getYear(), 2, dayInFebruaryForTheYear);
+        int dayInFebruaryForTheYear = sendingDate.withMonth(Month.FEBRUARY.getValue()).lengthOfMonth();
+        LocalDate result = LocalDate.of(sendingDate.getYear(), Month.FEBRUARY, dayInFebruaryForTheYear);
         if(sendingDate.isAfter(result)){
-            result = result.plusYears(1);
-            result = result.withDayOfMonth(result.lengthOfMonth());
+            result = LocalDate.of(
+                    result.plusYears(1).getYear(),
+                    Month.FEBRUARY,
+                    result.plusYears(1).lengthOfMonth());
         }
         return result;
     }
